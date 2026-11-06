@@ -6,7 +6,7 @@ Automatically retrieved and grouped by title/abstract keywords. Inclusion here i
 
 自动检索仅负责发现与去重；这里的论文尚待精读，不等同于精选推荐。正式发表状态请以出版页面为准。
 
-Last successful search (UTC): 2026-11-06T08:59:49+00:00
+Last successful search (UTC): 2026-11-06T09:01:25+00:00
 Search window (new submissions): 2026-10-30 — 2026-11-06
 
 Already tracked candidates are also checked for revisions. Curated entries are maintained separately.
