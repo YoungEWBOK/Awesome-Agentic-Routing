@@ -1,0 +1,8 @@
+{
+  "interval_days": 14,
+  "initial_lookback_days": 35,
+  "overlap_days": 7,
+  "page_size": 100,
+  "max_results": 2000,
+  "query": "(ti:routing OR ti:router OR ti:orchestration OR ti:orchestrator OR ti:delegation OR ti:cascading) AND (abs:LLM OR abs:LLMs OR abs:\"language model\" OR abs:\"language models\")"
+}
