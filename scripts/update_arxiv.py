@@ -172,26 +172,22 @@ def md(text):
 
 
 def render_recent(papers, state):
-    lines = ["# Recent arXiv candidates / 最新待读论文", "",
-             "[Back to curated list](README.md) · [Reading guide](READING_GUIDE.zh-CN.md)", "",
-             "Automatically retrieved across model routing, LLM routing, and agent routing/orchestration, then grouped by title/abstract keywords. Inclusion here is **not** a quality endorsement or evidence of peer review. Read the paper before promoting it to the curated list. False positives may appear; search is not exhaustive.", "",
-             "自动检索仅负责发现与去重；这里的论文尚待精读，不等同于精选推荐。正式发表状态请以出版页面为准。", "",
-             "Last successful search (UTC): " + state["last_success"],
-             "Search window (new submissions): " + state["window_start"] + " — " + state["window_end"],
-             "", "Already tracked candidates are also checked for revisions. Curated entries are maintained separately.", "",
-             f"Tracking **{len(papers)}** candidates. Showing up to 30 most recently submitted papers per group; [all candidate metadata](data/candidates.json).", ""]
+    lines = ["# Recent arXiv papers", "",
+             "[Paper index](README.md) · [中文阅读指南](READING_GUIDE.zh-CN.md)", "",
+             "New submissions retrieved from arXiv and grouped by title/abstract keywords. Entries await editorial review. Official code and publication venues are recorded in the main list after source verification.", "",
+             "Last search (UTC): " + state["last_success"] + ".", "",
+             "New-submission window: " + state["window_start"] + " — " + state["window_end"] + ".", "",
+             f"{len(papers)} tracked papers; up to 30 recent entries per group are shown below. Previously tracked papers are also checked for revisions. [Full metadata](data/candidates.json).", ""]
     if not papers:
         lines += ["No unreviewed candidates matched this search yet.", ""]
     for group in ["Agentic routing / orchestration", "Survey / evaluation", "Model / LLM routing and cascading"]:
         subset = [p for p in papers if p["group"] == group]
         if not subset:
             continue
-        lines += ["## " + group, ""]
+        lines += ["## " + group, "", "| Paper | Submitted | Updated | Version |", "| --- | --- | --- | --- |"]
         for p in subset[:30]:
-            authors = ", ".join(p["authors"][:3]) + (" et al." if len(p["authors"]) > 3 else "")
-            lines += ["- **[" + md(p["title"]) + "](" + p["url"] + ")**",
-                      "  - " + md(authors) + " · Submitted " + p["published"][:10] + " · Updated " + p["updated"][:10] + " · " + p["version"],
-                      "  - Abstract excerpt (first 24 words): “" + md(p["abstract_excerpt"]) + "…”", ""]
+            lines.append("| [" + md(p["title"]) + "](" + p["url"] + ") | " + p["published"][:10] + " | " + p["updated"][:10] + " | " + p["version"] + " |")
+        lines.append("")
     return "\n".join(lines)
 
 

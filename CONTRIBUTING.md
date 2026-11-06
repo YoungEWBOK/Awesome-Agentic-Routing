@@ -1,45 +1,51 @@
-# Curation and maintenance
+# Contributing
 
-## What belongs here
+## Scope
 
-Prioritize a clear routing/orchestration research question, a useful conceptual contribution, and evidence that can be inspected in the paper. Favor papers with informative evaluations and available artifacts, but do not equate venue, popularity, or code availability with quality. Keep a manageable reading path.
+This list covers routing across independent models and agents: query-level model selection, cascades, capability representations, sequential routing, orchestration, and evaluation. Surveys and research software are included. Network routing and expert routing inside a single MoE model are outside the current scope.
 
-Model routing, LLM routing, and agent routing/orchestration are all first-class topics. Include query-level selection, cascading, quality/cost/latency optimization, cold-start models, transfer, surveys, and evaluation. Exclude unrelated network routing, model-internal MoE routing, generic agent applications, and papers whose only connection is the word “agent”.
+## Paper entries
 
-## Add or revise a curated paper
+Edit `data/curated.json`, then run `python scripts/render_catalog.py` to regenerate the README and resource notes.
 
-1. Read the primary paper page and relevant problem/method/evaluation sections. Record the exact title, authors, first-release year, stable arXiv ID when available, and source URL.
-2. Verify any venue claim with the publication page or clearly label author-reported acceptance. An arXiv-linked version is not proof of either peer review or lack of peer review.
-3. Add an entry to `data/curated.json`, with a concise `why_read` and a concrete `reading_question`. Set `checked_on` and honestly describe `review_depth`. Do not add headline numerical claims without their exact setting.
-4. Run `python scripts/render_catalog.py`. Update the Chinese guide when the reading path changes.
-5. If promoting a candidate, remove it from `data/candidates.json` and regenerate `RECENT.md` using `render_recent` and the existing update state, or run the updater. Do not modify `first_seen` simply because a paper has a new version.
+Each entry records the title, authors, first-release year, paper URL, venue, category, method, and task setting. Describe the method directly. Numerical results should include the dataset, model pool, metric, and comparison conditions if reported in the list.
 
-The repository uses arXiv IDs and normalized titles for ordinary deduplication, and Git for change history. No custom content hashes or frozen research contracts are needed.
+Use publisher proceedings, ACL Anthology, OpenReview, or the authors' paper record for venue information. Label workshops and Findings separately from main-conference papers. An author-reported acceptance is marked with †. Use `arXiv YYYY` when no venue is recorded; this does not establish that the work is unpublished elsewhere.
 
-## Automatic discovery
+## Code and resources
 
-The workflow runs on the default branch. Its Friday trigger is **01:17 UTC / 09:17 Asia/Shanghai**. Scheduled searches are due after 14 local calendar days since the last successful search. With initialization on 2026-11-06, the next expected search is 2026-11-20. A manual run searches immediately and resets that successful-search date.
+Add `code_url` only when a paper, author page, or repository README establishes the connection to that paper. Record the attribution URL in `code_source` and the check date in `code_checked_on`. Matching repository names alone is insufficient. Third-party implementations must be labeled separately.
 
-The search covers new submissions since the previous successful run plus a seven-day overlap. On the initial run it covers 35 days plus the overlap. It retrieves all result pages within the configured limit, then filters title/abstract keywords into model/LLM routing, agentic routing, and survey/evaluation candidates. It also requests current metadata for all previously tracked candidates, catching revisions outside the new-submission window.
+Keep `code_url` null when no public implementation has been verified. A paper may report supplementary code without providing a public repository; record that distinction in `resource_note`. Model weights, datasets, and project pages can be added under `resources` when linked by the authors.
 
-Titles, authors, dates, links, and short abstract excerpts appear in `RECENT.md`. Candidates are **pending reading**, not selected recommendations. Full abstracts are used in memory for filtering and are not republished. Discovery cannot guarantee recall: terminology changes, indexing lag, and keyword false positives are possible. Older untracked revised papers and curated venue/title changes require editorial review.
+The README is a compact index. Longer methodological comparisons belong in `READING_GUIDE.zh-CN.md`; source and availability notes are rendered in `docs/resources.md`.
 
-The Python scripts require **Python 3.9+**, with no third-party packages or LLM API keys. The workflow uses the repository's temporary `GITHUB_TOKEN` with `contents: write` to commit only the reading inbox and search state. It does not change repository security settings or bypass branch protection.
+## arXiv updates
+
+The workflow checks each Friday at **09:17 Asia/Shanghai (01:17 UTC)**. It searches when 14 local calendar days have elapsed since the last successful run. Manual runs search immediately and restart the interval. With initialization on 2026-11-06, the next scheduled search is expected on 2026-11-20.
+
+New submissions are retrieved from the last successful search date with a seven-day overlap. Previously tracked papers are checked for revisions. Results are deduplicated by arXiv ID and screened using title/abstract keywords. `RECENT.md` contains the resulting reading queue; it is not automatically merged into the main list. Code attribution and venue changes are reviewed manually.
+
+The initial search covers 35 days plus the overlap. Keyword filtering can miss relevant work or include unrelated papers. It does not discover every revision to an older, untracked paper. Search parameters are in `data/search.json`.
+
+## Local commands
+
+Python 3.9 or later is required. The scripts use the standard library.
 
 ```bash
+python scripts/render_catalog.py
 python -m unittest discover -s tests -v
 python scripts/update_arxiv.py --dry-run
 python scripts/update_arxiv.py
 python scripts/update_arxiv.py --scheduled
-python scripts/render_catalog.py
 ```
 
-## Failure and recovery
+## Workflow failures
 
-- HTTP, parsing, incomplete pagination, missing tracked IDs, or result-limit failures cause a failed run. No successful-search date is advanced. Check Actions logs and rerun after resolving the error; a larger missed interval is recovered from the previous successful date.
-- A failed scheduled search is retried on the following Friday, or immediately through **Actions → Biweekly arXiv update → Run workflow**. A successful manual run restarts the 14-day interval.
-- A concurrent change to the default branch can make the bot's ordinary push fail. It does not force-push; rerun from the new branch head.
-- If write permission or branch protection blocks the bot, the run will fail visibly. Adjust the publishing method deliberately; do not weaken protection automatically.
-- GitHub can delay scheduled jobs and can disable schedules in inactive public repositories. Check the Actions page if updates stop. No external notification or email service is configured.
+The workflow uses `GITHUB_TOKEN` with `contents: write` and commits only `RECENT.md`, candidate metadata, and update state. It uses ordinary pushes and respects branch protection.
 
-References: [arXiv API documentation](https://info.arxiv.org/help/api/user-manual.html), [GitHub scheduled workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+Failed requests, incomplete metadata, pagination errors, or result-limit errors stop the update without advancing the last successful search date. A failed push also leaves the remote update state unchanged. Inspect Actions logs and rerun **Biweekly arXiv update** after resolving the error. A concurrent branch update should be handled by rerunning from the new branch head, not by force-pushing.
+
+GitHub may delay scheduled runs or disable schedules in inactive public repositories. Permission and branch-protection changes require explicit maintenance; the updater does not change them.
+
+References: [arXiv API](https://info.arxiv.org/help/api/user-manual.html), [GitHub scheduled workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).

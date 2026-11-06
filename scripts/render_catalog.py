@@ -1,63 +1,98 @@
-"""Render the curated reading list from data/curated.json (no network)."""
+"""Render the paper index and resource notes from data/curated.json."""
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SECTIONS = [
-    ("surveys", "Surveys"),
-    ("foundations", "Model and LLM routing"),
-    ("cascading", "Cascading and escalation"),
-    ("sequential", "Sequential and budget-aware agentic routing"),
-    ("orchestration", "Multi-model and multi-agent orchestration"),
-    ("capabilities", "Capability representation, cold start, and transfer"),
-    ("evaluation", "Benchmarks, evaluation, and infrastructure"),
+    ('surveys', 'Surveys', 'Surveys of model selection, cascading, and inference efficiency.'),
+    ('prediction', 'Query routing: quality and cost prediction', 'The router selects a model before response generation, using predicted quality, cost, or latency.'),
+    ('representation', 'Query routing: representations and transfer', 'These methods study query-model compatibility, capability profiles, or adaptation to new candidate models.'),
+    ('cascading', 'Cascading and response verification', 'The policy observes an answer or confidence signal before deciding whether to stop or call another model.'),
+    ('sequential', 'Sequential and budget-aware routing', 'Model choices are made during a dialogue or task trajectory. Previous outputs and remaining resources affect later decisions.'),
+    ('orchestration', 'Model and agent orchestration', 'The controller chooses model or tool calls, agent roles, or subtask assignments. The action space varies across papers.'),
+    ('benchmarks', 'Benchmarks and evaluation', 'Evaluation resources for query-level selection and routing within agent trajectories.'),
+    ('infrastructure', 'Software and infrastructure', 'Shared implementations and evaluation pipelines for routing research.'),
 ]
 
 
+def anchor(text):
+    return text.lower().replace(':', '').replace(' ', '-')
+
+
+def cell(text):
+    return text.replace('|', '&#124;').replace('\n', ' ')
+
+
+def venue(p):
+    text = p['publication'] + (' †' if p.get('publication_note') else '')
+    return f"[{text}]({p['publication_url']})" if p.get('publication_url') else text
+
+
+def render_readme(papers):
+    checked = max(p['checked_on'] for p in papers)
+    lines = ['# Awesome Agentic Routing', '',
+             'Research on model selection, LLM routing, cascades, and agent orchestration.', '',
+             '[中文阅读指南](READING_GUIDE.zh-CN.md) · [Code and other resources](docs/resources.md) · [Recent arXiv papers](RECENT.md) · [Contributing](CONTRIBUTING.md)', '',
+             f'{len(papers)} papers · 2023–2026 · Updated {checked}', '',
+             '## Contents', '']
+    lines += [f'- [{heading}](#{anchor(heading)})' for _, heading, _ in SECTIONS]
+    lines += ['', '## Scope and notation', '',
+              'The list covers routing across independent models and agents, from single-query selection to decisions within multi-step tasks. Papers are grouped by their main decision setting; a method may also be relevant to other sections.', '',
+              '**Venue** links to the publication record when available. **†** indicates acceptance reported by the authors. **arXiv** identifies the manuscript version when no venue is recorded here. **Code** links to author implementations; **—** means no public implementation was located in the checked sources. Dates refer to the linked records, not necessarily the first preprint.', '']
+    for category, heading, description in SECTIONS:
+        lines += ['## ' + heading, '', description, '',
+                  '| Paper | Venue | Method / setting | Code |',
+                  '| --- | --- | --- | --- |']
+        for p in sorted((p for p in papers if p['category'] == category), key=lambda p: (-p['year'], p['name'])):
+            title = p['title'].replace('E$^3$-Orch', 'E³-Orch')
+            paper = f"**{p['name']}**<br>[{cell(title)}]({p['url']})"
+            method = cell(p['method']) + '<br><sub>' + cell(p['setting']) + '</sub>'
+            code = f"[GitHub]({p['code_url']})" if p.get('code_url') else '—'
+            lines.append(f'| {paper} | {venue(p)} | {method} | {code} |')
+        lines.append('')
+    lines += ['## Reading and updates', '',
+              'The [Chinese reading guide](READING_GUIDE.zh-CN.md) compares problem formulations, supervision, and evaluation. [Resource notes](docs/resources.md) include code provenance and available data, models, and project pages.', '',
+              '[Recent arXiv papers](RECENT.md) are collected every two weeks. This feed is screened by keywords and kept separate from the main list; code links and publication changes are checked manually. The schedule and maintenance commands are documented in [CONTRIBUTING.md](CONTRIBUTING.md).', '',
+              '## Related collections', '',
+              '- [MilkThink-Lab / Awesome-Routing-LLMs](https://github.com/MilkThink-Lab/Awesome-Routing-LLMs) — a broader routing bibliography; its categorized tables informed the organization of this list.', '',
+              'Corrections and paper suggestions are welcome through issues or pull requests.', '']
+    return '\n'.join(lines)
+
+
+def render_resources(papers):
+    checked = max(p['code_checked_on'] for p in papers)
+    lines = ['# Code, data, and source notes', '', '[Paper index](../README.md)', '',
+             f'Links checked on {checked}. Author attribution was established from the paper, author page, or a repository README that identifies the paper. Availability does not imply that the implementation has been reproduced.', '',
+             '## Author implementations', '', '| Paper | Code | Attribution source |', '| --- | --- | --- |']
+    for p in sorted(papers, key=lambda p: p['name'].lower()):
+        if p.get('code_url'):
+            label = p['code_url'].removeprefix('https://github.com/')
+            lines.append(f"| [{p['name']}]({p['url']}) | [{label}]({p['code_url']}) | [Repository documentation]({p['code_source']}) |")
+    lines += ['', '## Additional resources', '', '| Paper | Resources |', '| --- | --- |']
+    for p in papers:
+        if p.get('resources'):
+            links = ' · '.join(f"[{r['label']}]({r['url']})" for r in p['resources'])
+            lines.append(f"| {p['name']} | {links} |")
+    lines += ['', '## Resource notes', '']
+    for p in papers:
+        if p.get('resource_note'):
+            lines.append(f"- **[{p['name']}]({p['url']})**: {p['resource_note']}")
+    lines += ['', 'No public repository was located for ' + ', '.join(p['name'] for p in papers if not p.get('code_url') and p['category'] != 'surveys') + '. A missing link should not be interpreted as a claim that code has never been released.', '',
+              '## Publication records', '', '| Paper | Recorded venue / version |', '| --- | --- |']
+    for p in sorted(papers, key=lambda p: p['name'].lower()):
+        lines.append(f"| [{p['name']}]({p['url']}) | {venue(p)} |")
+    lines += ['', '† Acceptance reported in the authors\' arXiv record. The full author lists and verification notes are retained in [the catalog](../data/curated.json).', '',
+              'The JAIR record for *Doing More with Less* was checked against [Crossref](https://api.crossref.org/works/10.1613/jair.1.19801). FrugalGPT\'s TMLR publication and repository are also listed on [Lingjiao Chen\'s author page](https://lingjiaochen.com/).', '']
+    return '\n'.join(lines)
+
+
 def main():
-    papers = json.loads((ROOT / "data/curated.json").read_text(encoding="utf-8"))
-    lines = ["# Awesome Agentic Routing", "",
-             "A curated reading list covering **model routing, LLM routing, and agent routing/orchestration**: choosing suitable models and agents for queries, workflows, and evolving tasks under quality and resource constraints.", "",
-             "[中文阅读路线](READING_GUIDE.zh-CN.md) · [Recent arXiv candidates](RECENT.md) · [Contributing and update policy](CONTRIBUTING.md) · [Machine-readable catalog](data/curated.json)", "",
-             "Maintained by [YoungEWBOK](https://github.com/YoungEWBOK). Initial collection: **2023–2026**. Last editorial review: **" + max(p["checked_on"] for p in papers) + "**. **" + str(len(papers)) + " selected papers.**", "",
-             "## Scope", "",
-             "Model/LLM routing and agentic routing are equally in scope: single-query model selection, quality/cost/latency-aware routing, cascading, cold-start model integration, transferable capability representations, sequential routing, and multi-agent orchestration. Model-internal MoE routing, network/PCB routing, and generic agent frameworks without a routing contribution are outside the main scope.", "",
-             "| Decision | What changes? | Starting points |", "| --- | --- | --- |",
-             "| Query routing | The model answering one input | RouteLLM, GraphRouter |",
-             "| Cascading | Whether to stop or escalate after an answer | FrugalGPT |",
-             "| Sequential routing | The next model, given history and budget | BAAR, MTRouter, DialRouter |",
-             "| Orchestration | Calls, roles, subtasks, and their dependencies | Router-R1, MasRouter, ToolOrchestra, E³-Orch |",
-             "| Evaluation | Whether a local replacement preserves final success | TwinRouterBench |", "",
-             "These are reading categories, not mutually exclusive definitions. User dialogue turns, internal model calls, and environment interaction steps must be distinguished.", "",
-             "## Start here", "",
-             "1. **Dynamic Model Routing and Cascading** — read the design space and evaluation sections.",
-             "2. **RouteLLM + FrugalGPT** — compare deciding before versus after generation.",
-             "3. **BAAR + MTRouter** — understand path dependence, budgets, and outcome prediction.",
-             "4. **SkillOrchestra** — compare explicit capability knowledge with learned routing policies.",
-             "5. **TwinRouterBench** — examine static labels versus live downstream execution.",
-             "6. **Router-R1 → ToolOrchestra → E³-Orch** — expand into learned orchestration.", "",
-             "## How to read this list", "",
-             "Selection reflects problem relevance, conceptual value, and inspectable evidence, not a numerical ranking or a guarantee of reproducibility. Each entry explains its contribution and a question worth checking. Initial review depth is metadata/abstract plus selected method sections; these are not reproduction reports.", "",
-             "**Publication labels:** explicit venues are backed by a linked publication source or attributed to the authors' arXiv notice. **arXiv version** means we cite that version and have not independently established a publication venue; it does not assert the work has never been peer reviewed. Dates are first-release years, which may differ from venue years.", ""]
-    for key, heading in SECTIONS:
-        lines += ["## " + heading, ""]
-        for p in papers:
-            if p["category"] != key:
-                continue
-            author = p["authors"][0] + (" et al." if len(p["authors"]) > 1 else "")
-            status = "[" + p["publication"] + "](" + p["publication_url"] + ")" if p.get("publication_url") else p["publication"]
-            lines += ["### " + p["name"], "",
-                      "**[" + p["title"] + "](" + p["url"] + ")**", "",
-                      author + " · " + str(p["year"]) + " · " + status, "",
-                      "- **Why read:** " + p["why_read"],
-                      "- **Read critically:** " + p["reading_question"], ""]
-    lines += ["## Biweekly arXiv discovery", "",
-              "[The workflow](.github/workflows/arxiv-update.yml) checks on Fridays at **09:17 Asia/Shanghai (01:17 UTC)** and searches when at least 14 local calendar days have elapsed since the previous successful search. It can also be run manually from Actions. The first scheduled search after initialization on 2026-11-06 is expected on **2026-11-20**. GitHub may delay scheduled jobs.", "",
-              "New matching papers are published to [RECENT.md](RECENT.md), with version-aware deduplication and a seven-day discovery overlap. Existing candidates are refreshed for revisions. The curated list is edited after reading; the automation does not certify scientific quality or promote candidates automatically. It uses the public arXiv API and GitHub's built-in workflow token, with no paid model API or extra secret required.", "",
-              "A successful search updates its date even when it finds no new candidates. Failed or incomplete searches leave the last successful date unchanged. See [maintenance instructions](CONTRIBUTING.md) for limitations and recovery.", ""]
-    (ROOT / "README.md").write_text("\n".join(lines), encoding="utf-8")
-    print(f"Rendered {len(papers)} curated entries.")
+    papers = json.loads((ROOT / 'data/curated.json').read_text(encoding='utf-8'))
+    (ROOT / 'README.md').write_text(render_readme(papers), encoding='utf-8')
+    (ROOT / 'docs').mkdir(exist_ok=True)
+    (ROOT / 'docs/resources.md').write_text(render_resources(papers), encoding='utf-8')
+    print(f'Rendered {len(papers)} papers and resource notes.')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
