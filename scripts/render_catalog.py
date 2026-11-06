@@ -8,7 +8,7 @@ SECTIONS = [
     ('prediction', 'Query routing: quality and cost prediction', 'The router selects a model before response generation, using predicted quality, cost, or latency.'),
     ('representation', 'Query routing: representations and transfer', 'These methods study query-model compatibility, capability profiles, or adaptation to new candidate models.'),
     ('cascading', 'Cascading and response verification', 'The policy observes an answer or confidence signal before deciding whether to stop or call another model.'),
-    ('sequential', 'Sequential and budget-aware routing', 'Model choices are made during a dialogue or task trajectory. Previous outputs and remaining resources affect later decisions.'),
+    ('sequential', 'Sequential and budget-aware routing', 'Model choices are made across dialogue turns, task steps, or token-generation steps. Previous outputs, user history, and remaining resources enter different formulations.'),
     ('orchestration', 'Model and agent orchestration', 'The controller chooses model or tool calls, agent roles, or subtask assignments. The action space varies across papers.'),
     ('benchmarks', 'Benchmarks and evaluation', 'Evaluation resources for query-level selection and routing within agent trajectories.'),
     ('infrastructure', 'Software and infrastructure', 'Shared implementations and evaluation pipelines for routing research.'),
@@ -51,7 +51,7 @@ def render_readme(papers):
             lines.append(f'| {paper} | {venue(p)} | {method} | {code} |')
         lines.append('')
     lines += ['## Reading and updates', '',
-              'The [Chinese reading guide](READING_GUIDE.zh-CN.md) compares problem formulations, supervision, and evaluation. [Resource notes](docs/resources.md) include code provenance and available data, models, and project pages.', '',
+              'The [Chinese reading guide](READING_GUIDE.zh-CN.md) compares problem formulations, supervision, and evaluation. [Resource notes](docs/resources.md) include code provenance and available data, models, and project pages. The [coverage review](docs/coverage.md) records additions identified by comparison with related collections.', '',
               '[Recent arXiv papers](RECENT.md) are collected every two weeks. This feed is screened by keywords and kept separate from the main list; code links and publication changes are checked manually. The schedule and maintenance commands are documented in [CONTRIBUTING.md](CONTRIBUTING.md).', '',
               '## Related collections', '',
               '- [MilkThink-Lab / Awesome-Routing-LLMs](https://github.com/MilkThink-Lab/Awesome-Routing-LLMs) — a broader routing bibliography; its categorized tables informed the organization of this list.', '',
@@ -67,7 +67,7 @@ def render_resources(papers):
     for p in sorted(papers, key=lambda p: p['name'].lower()):
         if p.get('code_url'):
             label = p['code_url'].removeprefix('https://github.com/')
-            lines.append(f"| [{p['name']}]({p['url']}) | [{label}]({p['code_url']}) | [Repository documentation]({p['code_source']}) |")
+            lines.append(f"| [{p['name']}]({p['url']}) | [{label}]({p['code_url']}) | [Source]({p['code_source']}) |")
     lines += ['', '## Additional resources', '', '| Paper | Resources |', '| --- | --- |']
     for p in papers:
         if p.get('resources'):
@@ -77,7 +77,7 @@ def render_resources(papers):
     for p in papers:
         if p.get('resource_note'):
             lines.append(f"- **[{p['name']}]({p['url']})**: {p['resource_note']}")
-    lines += ['', 'No public repository was located for ' + ', '.join(p['name'] for p in papers if not p.get('code_url') and p['category'] != 'surveys') + '. A missing link should not be interpreted as a claim that code has never been released.', '',
+    lines += ['', 'No verified implementation link is recorded for ' + ', '.join(p['name'] for p in papers if not p.get('code_url') and p['category'] != 'surveys') + '. Availability details are noted above where known; an unset link does not establish that code has never been released.', '',
               '## Publication records', '', '| Paper | Recorded venue / version |', '| --- | --- |']
     for p in sorted(papers, key=lambda p: p['name'].lower()):
         lines.append(f"| [{p['name']}]({p['url']}) | {venue(p)} |")

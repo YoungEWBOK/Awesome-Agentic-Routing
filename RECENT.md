@@ -4,11 +4,11 @@
 
 New submissions retrieved from arXiv and grouped by title/abstract keywords. Entries await editorial review. Official code and publication venues are recorded in the main list after source verification.
 
-Last search (UTC): 2026-11-06T09:30:33+00:00.
+Last search (UTC): 2026-11-06T09:47:06+00:00.
 
 New-submission window: 2026-10-30 — 2026-11-06.
 
-71 tracked papers; up to 30 recent entries per group are shown below. Previously tracked papers are also checked for revisions. [Full metadata](data/candidates.json).
+70 tracked papers; up to 30 recent entries per group are shown below. Previously tracked papers are also checked for revisions. [Full metadata](data/candidates.json).
 
 ## Agentic routing / orchestration
 
@@ -76,6 +76,6 @@ New-submission window: 2026-10-30 — 2026-11-06.
 | [Student-Guided Teacher Distillation for Efficient LLM Task Routing: Positioning Against Jev-Style System-1 Classifiers](https://arxiv.org/abs/2610.02516) | 2026-10-01 | 2026-10-01 | v1 |
 | [OR for AI That Does OR: Routing LLMs up the Escalator inside the OSCAR Framework](https://arxiv.org/abs/2610.00912) | 2026-10-01 | 2026-10-01 | v1 |
 | [FlexRouter: Learning Complementary Model Sets for Flexible LLM Routing](https://arxiv.org/abs/2609.38585) | 2026-09-29 | 2026-09-29 | v1 |
-| [Routing Should Pay for Itself: Sparse Supervision for Economical LLM Routing](https://arxiv.org/abs/2609.37402) | 2026-09-29 | 2026-09-29 | v1 |
 | [Resolution as a First-Class Decision: Task-Conditioned Routing for Efficient Multimodal Large Language Models](https://arxiv.org/abs/2609.34942) | 2026-09-28 | 2026-09-28 | v1 |
 | [SeLMRoute: Probabilistic Semantic Evidence for Large Language Model Routing](https://arxiv.org/abs/2609.34736) | 2026-09-28 | 2026-09-28 | v1 |
+| [Routing Drift Alone Does Not Diagnose Failure in Merged MoE LLMs](https://arxiv.org/abs/2609.32821) | 2026-09-26 | 2026-09-26 | v1 |

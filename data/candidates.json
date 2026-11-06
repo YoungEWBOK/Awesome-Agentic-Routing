@@ -1299,30 +1299,6 @@
     "abstract_excerpt": "Existing LLM routers choose among models using static per-model costs. We show that open-weight inference markets introduce a second, largely ignored decision axis: after"
   },
   {
-    "arxiv_id": "2609.37402",
-    "version": "v1",
-    "title": "Routing Should Pay for Itself: Sparse Supervision for Economical LLM Routing",
-    "authors": [
-      "Guannan Lai",
-      "Gelin Bian",
-      "Hao-Xuan Ma",
-      "Jun-Peng Jiang",
-      "Long Chen",
-      "Jian-Dong Liu",
-      "Zhi-Hao Tan",
-      "Han-Jia Ye"
-    ],
-    "published": "2026-09-29T12:42:02Z",
-    "updated": "2026-09-29T12:42:02Z",
-    "url": "https://arxiv.org/abs/2609.37402",
-    "journal_ref": "",
-    "comment": "",
-    "group": "Model / LLM routing and cascading",
-    "status": "Pending reading; not a quality endorsement",
-    "first_seen": "2026-11-06",
-    "abstract_excerpt": "Large language model (LLM) routing reduces serving cost by assigning each query to an appropriate model while preserving response quality. Learning such a router,"
-  },
-  {
     "arxiv_id": "2609.34942",
     "version": "v1",
     "title": "Resolution as a First-Class Decision: Task-Conditioned Routing for Efficient Multimodal Large Language Models",
