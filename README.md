@@ -1,14 +1,14 @@
 # Awesome Agentic Routing
 
-A curated reading list on choosing **which model or agent should act next**, under evolving task state, quality requirements, and resource constraints.
+A curated reading list covering **model routing, LLM routing, and agent routing/orchestration**: choosing suitable models and agents for queries, workflows, and evolving tasks under quality and resource constraints.
 
 [中文阅读路线](READING_GUIDE.zh-CN.md) · [Recent arXiv candidates](RECENT.md) · [Contributing and update policy](CONTRIBUTING.md) · [Machine-readable catalog](data/curated.json)
 
-Maintained by [YoungEWBOK](https://github.com/YoungEWBOK). Initial collection: **2023–2026**. Last editorial review: **2026-11-06**. **20 selected papers.**
+Maintained by [YoungEWBOK](https://github.com/YoungEWBOK). Initial collection: **2023–2026**. Last editorial review: **2026-11-06**. **30 selected papers.**
 
 ## Scope
 
-The core is routing **during** agent execution: selecting models, agents, or intelligent tools as the interaction changes. We also include the routing/cascading foundations and evaluation work needed to understand it. Model-internal MoE routing, network/PCB routing, and generic agent frameworks without a routing contribution are outside the main scope.
+Model/LLM routing and agentic routing are equally in scope: single-query model selection, quality/cost/latency-aware routing, cascading, cold-start model integration, transferable capability representations, sequential routing, and multi-agent orchestration. Model-internal MoE routing, network/PCB routing, and generic agent frameworks without a routing contribution are outside the main scope.
 
 | Decision | What changes? | Starting points |
 | --- | --- | --- |
@@ -55,16 +55,16 @@ Yasmin Moslem et al. · 2026 · [TMLR 2026 (author-reported acceptance)](https:/
 - **Why read:** Provides a useful design space: when a decision happens, what it observes, and how it is computed; includes evaluation failure modes.
 - **Read critically:** Does an apparent improvement survive differences in model pools, cost definitions, and evaluation protocols?
 
-## Foundations: model selection and cascading
+### Efficient Multi-LLM Inference Survey
 
-### FrugalGPT
+**[Towards Efficient Multi-LLM Inference: Characterization and Analysis of LLM Routing and Hierarchical Techniques](https://arxiv.org/abs/2506.06579)**
 
-**[FrugalGPT: How to Use Large Language Models While Reducing Cost and Improving Performance](https://arxiv.org/abs/2305.05176)**
+Adarsh Prasad Behera et al. · 2025 · arXiv version; venue not independently verified
 
-Lingjiao Chen et al. · 2023 · arXiv version; venue not independently verified
+- **Why read:** Compares query routing and hierarchical escalation with attention to resource-constrained inference and evaluation.
+- **Read critically:** Separate model-level quality improvements from hardware, latency, and serving assumptions.
 
-- **Why read:** A foundational model-cascade approach: decide when an answer is sufficient and when another model is worth its cost.
-- **Read critically:** Account for earlier calls and the answer scorer; escalation is not free.
+## Model and LLM routing
 
 ### RouteLLM
 
@@ -75,14 +75,61 @@ Isaac Ong et al. · 2024 · [ICLR 2025](https://openreview.net/pdf/900c2f5b71fd9
 - **Why read:** Learns strong-versus-weak model routing from preference data; a clear entry point into routing supervision and transfer.
 - **Read critically:** Does preference-based single-query selection remain appropriate when intermediate outputs affect later steps?
 
-### GraphRouter
+### Hybrid LLM
 
-**[GraphRouter: A Graph-based Router for LLM Selections](https://arxiv.org/abs/2410.03834)**
+**[Hybrid LLM: Cost-Efficient and Quality-Aware Query Routing](https://arxiv.org/abs/2404.14618)**
 
-Tao Feng et al. · 2024 · arXiv version; venue not independently verified
+Dujian Ding et al. · 2024 · [ICLR 2024](https://proceedings.iclr.cc/paper_files/paper/2024/hash/b47d93c99fa22ac0b377578af0a1f63a-Abstract-Conference.html)
 
-- **Why read:** Represents tasks, queries, and models in a heterogeneous graph, supporting inductive model selection.
-- **Read critically:** What observations are required to introduce a new model? Query-level induction alone does not establish trajectory-level transfer.
+- **Why read:** Routes between small and large models using estimated difficulty and a tunable quality requirement.
+- **Read critically:** How is the quality gap estimated, and how does the chosen tolerance affect the cost-quality curve?
+
+### RouterDC
+
+**[RouterDC: Query-Based Router by Dual Contrastive Learning for Assembling Large Language Models](https://arxiv.org/abs/2409.19886)**
+
+Shuhao Chen et al. · 2024 · [NeurIPS 2024 (author-reported acceptance)](https://arxiv.org/abs/2409.19886)
+
+- **Why read:** Uses query and model embeddings with dual contrastive learning to exploit complementary model strengths.
+- **Read critically:** When several models answer correctly, what supervision distinguishes equally useful choices?
+
+### CARROT
+
+**[CARROT: A Cost Aware Rate Optimal Router](https://arxiv.org/abs/2502.03261)**
+
+Seamus Somerstep et al. · 2025 · arXiv version; venue not independently verified
+
+- **Why read:** Connects cost-and-quality prediction to a minimax analysis of routing and provides the SPROUT dataset.
+- **Read critically:** Which assumptions support the rate-optimality result, and how do they relate to the empirical setting?
+
+### MixLLM
+
+**[MixLLM: Dynamic Routing in Mixed Large Language Models](https://arxiv.org/abs/2502.18482)**
+
+Xinyuan Wang et al. · 2025 · [NAACL 2025](https://aclanthology.org/2025.naacl-long.545/)
+
+- **Why read:** Uses contextual-bandit routing with quality, cost, and latency estimates and continuing feedback.
+- **Read critically:** How are exploration and feedback costs handled when the candidate pool or request distribution changes?
+
+## Cascading and escalation
+
+### FrugalGPT
+
+**[FrugalGPT: How to Use Large Language Models While Reducing Cost and Improving Performance](https://arxiv.org/abs/2305.05176)**
+
+Lingjiao Chen et al. · 2023 · arXiv version; venue not independently verified
+
+- **Why read:** A foundational model-cascade approach: decide when an answer is sufficient and when another model is worth its cost.
+- **Read critically:** Account for earlier calls and the answer scorer; escalation is not free.
+
+### AutoMix
+
+**[AutoMix: Automatically Mixing Language Models](https://arxiv.org/abs/2310.12963)**
+
+Pranjal Aggarwal et al. · 2023 · [NeurIPS 2024](https://proceedings.neurips.cc/paper_files/paper/2024/hash/ecda225cb187b40ea8edc1f46b03ffda-Abstract-Conference.html)
+
+- **Why read:** Combines few-shot self-verification with a POMDP router to decide when a larger model is worth calling.
+- **Read critically:** How reliable is self-verification under domain shift, and is its own cost counted?
 
 ## Sequential and budget-aware agentic routing
 
@@ -169,7 +216,16 @@ Junnan Liu et al. · 2026 · arXiv version; venue not independently verified
 - **Why read:** Uses milestone-plan-act orchestration and execution feedback for dependency-aware delegation and parallel execution.
 - **Read critically:** Inspect credit assignment, executor descriptions, and transfer to unseen executor configurations; the authors mark it work in progress.
 
-## Capability representation and experience
+## Capability representation, cold start, and transfer
+
+### GraphRouter
+
+**[GraphRouter: A Graph-based Router for LLM Selections](https://arxiv.org/abs/2410.03834)**
+
+Tao Feng et al. · 2024 · arXiv version; venue not independently verified
+
+- **Why read:** Represents tasks, queries, and models in a heterogeneous graph, supporting inductive model selection.
+- **Read critically:** What observations are required to introduce a new model? Query-level induction alone does not establish trajectory-level transfer.
 
 ### SkillOrchestra
 
@@ -198,7 +254,34 @@ Xinchen Liu et al. · 2026 · arXiv version; venue not independently verified
 - **Why read:** Connects routing to execution state and environment feedback, with traces reused for subsequent routing and model learning.
 - **Read critically:** Treat the data-flywheel argument as a research hypothesis to inspect; compare concrete evidence with the broader systems vision.
 
-## Benchmarks and evaluation
+### RouteProfile
+
+**[RouteProfile: Graph-Based Profiling for Cold-Start LLM Routing](https://arxiv.org/abs/2605.00180)**
+
+Jingjun Xu et al. · 2026 · arXiv version; venue not independently verified
+
+- **Why read:** Builds structured model profiles from public descriptions, families, and benchmark signals for cold-start routing.
+- **Read critically:** How much can public metadata tell us, and what additional evidence is required when a model enters a new pool?
+
+### RouteFM
+
+**[Pretrain Once, Route Anywhere: Towards a Foundation Model for LLM Routing](https://arxiv.org/abs/2609.37362)**
+
+Guannan Lai et al. · 2026 · arXiv version; venue not independently verified
+
+- **Why read:** Pretrains reusable routing from behavioral context, adapting to anonymous candidate models without target-domain parameter updates.
+- **Read critically:** Inspect separation of pretraining and transfer tasks, and how much measured behavior is needed for each new candidate.
+
+### LLMRec
+
+**[Let the LLM Stick to Its Strengths: Learning to Route Economical LLM](https://proceedings.neurips.cc/paper_files/paper/2025/hash/305a5630c29aaca434e3415fc4638eb2-Abstract-Conference.html)**
+
+Yi-Kai Zhang et al. · 2025 · [NeurIPS 2025](https://proceedings.neurips.cc/paper_files/paper/2025/hash/305a5630c29aaca434e3415fc4638eb2-Abstract-Conference.html)
+
+- **Why read:** Frames LLM routing as recommendation, combining candidate capabilities, query features, budgets, and behavioral signals.
+- **Read critically:** Which features transfer to new models and out-of-domain queries, and what profiling data must be collected?
+
+## Benchmarks, evaluation, and infrastructure
 
 ### RouterBench
 
@@ -226,6 +309,15 @@ Pei Yang et al. · 2026 · arXiv version; venue not independently verified
 
 - **Why read:** Combines static intermediate-prefix routing evaluation with live agent execution for downstream validation.
 - **Read critically:** Inspect label-construction protocols and the size and separation of the live evaluation split.
+
+### LLMRouter
+
+**[LLMRouter: Unified Infrastructure for Developing, Evaluating, and Deploying LLM Routers](https://arxiv.org/abs/2608.06867)**
+
+Tao Feng et al. · 2026 · arXiv version; venue not independently verified
+
+- **Why read:** Provides a modular routing formulation, implementations, and xRouteBench spanning multiple routing settings.
+- **Read critically:** An implementation in a shared framework is not by itself a reproduction of every original training and evaluation setting.
 
 ## Biweekly arXiv discovery
 

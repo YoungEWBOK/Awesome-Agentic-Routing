@@ -1,8 +1,10 @@
-# Agentic Routing：从领域地图到研究判断
+# 模型、LLM 与 Agent Routing：从领域地图到研究判断
 
 [精选目录](README.md) · [最新待读论文](RECENT.md)
 
 这份清单希望帮助我们沉下心来理解领域，逐步形成研究判断。每篇都记录为什么值得读、需要核对什么；不把摘要中的提升数字直接当成跨论文排行榜。
+
+模型路由、LLM 路由和 Agent 路由均为正式收录范围。单次模型选择、大小模型级联、冷启动、新模型接入和跨任务迁移也值得独立研究，不需要依附于 Agent 场景。
 
 ## 先弄清楚研究对象
 
@@ -31,11 +33,14 @@ Agentic Routing 关注：在任务不断执行、获得反馈的过程中，根�
 
 ## 第二轮：根据兴趣展开
 
+- **单次模型选择**：Hybrid LLM → RouteLLM → RouterDC → CARROT → MixLLM。分别看质量容忍度、偏好监督、对比学习、理论假设与在线反馈。
+- **级联与升级**：FrugalGPT → AutoMix。关注回答质量如何估计、错误置信度如何影响升级。
+- **新模型接入与通用路由**：GraphRouter → LLMRec → RouteProfile → RouteFM。比较模型元信息、能力分布、公开画像和少量行为上下文。
 - **长程决策与反馈**：DialRouter → BAAR → MTRouter → ProgRouter。比较用户模拟、终局结果和进展信号。
 - **模型作为工具**：Router-R1 → xRouter → ToolOrchestra。观察直接回答、外部调用和停止如何共同学习。
 - **组织与分工**：MasRouter → E³-Orch。区分系统组成选择和执行中重新规划。
 - **能力表示与经验复用**：GraphRouter → SkillOrchestra → RSI-Router → Harness-Native Agentic Routing。检查新模型接入、能力变化和路由与技能改进的归因。
-- **评测可信度**：RouterBench → LLMRouterBench → TwinRouterBench。逐步从单次结果表走向闭环任务执行。
+- **评测可信度**：RouterBench → LLMRouterBench → TwinRouterBench；结合 LLMRouter 理解统一实现与跨场景评测。逐步从单次结果表走向闭环任务执行。
 
 所有论文入口、发表状态与阅读问题均在 [README](README.md) 中。
 

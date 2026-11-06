@@ -5,22 +5,23 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SECTIONS = [
     ("surveys", "Surveys"),
-    ("foundations", "Foundations: model selection and cascading"),
+    ("foundations", "Model and LLM routing"),
+    ("cascading", "Cascading and escalation"),
     ("sequential", "Sequential and budget-aware agentic routing"),
     ("orchestration", "Multi-model and multi-agent orchestration"),
-    ("capabilities", "Capability representation and experience"),
-    ("evaluation", "Benchmarks and evaluation"),
+    ("capabilities", "Capability representation, cold start, and transfer"),
+    ("evaluation", "Benchmarks, evaluation, and infrastructure"),
 ]
 
 
 def main():
     papers = json.loads((ROOT / "data/curated.json").read_text(encoding="utf-8"))
     lines = ["# Awesome Agentic Routing", "",
-             "A curated reading list on choosing **which model or agent should act next**, under evolving task state, quality requirements, and resource constraints.", "",
+             "A curated reading list covering **model routing, LLM routing, and agent routing/orchestration**: choosing suitable models and agents for queries, workflows, and evolving tasks under quality and resource constraints.", "",
              "[中文阅读路线](READING_GUIDE.zh-CN.md) · [Recent arXiv candidates](RECENT.md) · [Contributing and update policy](CONTRIBUTING.md) · [Machine-readable catalog](data/curated.json)", "",
              "Maintained by [YoungEWBOK](https://github.com/YoungEWBOK). Initial collection: **2023–2026**. Last editorial review: **" + max(p["checked_on"] for p in papers) + "**. **" + str(len(papers)) + " selected papers.**", "",
              "## Scope", "",
-             "The core is routing **during** agent execution: selecting models, agents, or intelligent tools as the interaction changes. We also include the routing/cascading foundations and evaluation work needed to understand it. Model-internal MoE routing, network/PCB routing, and generic agent frameworks without a routing contribution are outside the main scope.", "",
+             "Model/LLM routing and agentic routing are equally in scope: single-query model selection, quality/cost/latency-aware routing, cascading, cold-start model integration, transferable capability representations, sequential routing, and multi-agent orchestration. Model-internal MoE routing, network/PCB routing, and generic agent frameworks without a routing contribution are outside the main scope.", "",
              "| Decision | What changes? | Starting points |", "| --- | --- | --- |",
              "| Query routing | The model answering one input | RouteLLM, GraphRouter |",
              "| Cascading | Whether to stop or escalate after an answer | FrugalGPT |",

@@ -16,7 +16,7 @@
     "url": "https://arxiv.org/abs/2611.07534",
     "journal_ref": "",
     "comment": "11 pages, 2 figures, 6 tables. Accepted to the 33rd Asia-Pacific Software Engineering Conference (APSEC 2026). Code and data: https://github.com/YgcCoder/RouteBR",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "LLM-enabled customer-service software in financial institutions must choose a downstream service before responding. Classifiers and LLM routers can identify a relevant label or destination,"
@@ -36,7 +36,7 @@
     "url": "https://arxiv.org/abs/2611.05835",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Firms using large language models under fixed budgets must decide which model to call and whether to retry a failed task. Because a call's"
@@ -187,7 +187,7 @@
     "url": "https://arxiv.org/abs/2610.31428",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language models (LLMs) differ in capabilities and costs, motivating routing methods that adaptively choose a model for each query. These methods rely on"
@@ -210,7 +210,7 @@
     "url": "https://arxiv.org/abs/2610.30351",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language models often apply complex reasoning indiscriminately, leading to overthinking on simple tasks and underthinking on harder ones. We present Route-and-Generate (Rouge), a"
@@ -272,7 +272,7 @@
     "url": "https://arxiv.org/abs/2610.26171",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language models (LLM) are increasingly integrated into pervasive applications spanning heterogeneous cloud-edge resources. These heterogeneous resources differ in computational capacity, energy efficiency, network"
@@ -314,7 +314,7 @@
     "url": "https://arxiv.org/abs/2610.23249",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Small-to-large language model routing can reduce inference cost by escalating difficult inputs while retaining easier ones on a smaller model. Its success, however, depends"
@@ -376,7 +376,7 @@
     "url": "https://arxiv.org/abs/2610.22695",
     "journal_ref": "",
     "comment": "18 pages, 8 figures, 1 table",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "We study personalized LLM routing, where a router selects among heterogeneous models with different costs and capabilities. The router must minimize cumulative inference cost"
@@ -528,7 +528,7 @@
     "url": "https://arxiv.org/abs/2610.19198",
     "journal_ref": "",
     "comment": "50 pages, 7 figure, 45 tables",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "With the growing number of LLMs available, selecting which one to use for a prompt has become a key question. A large part of"
@@ -569,7 +569,7 @@
     "url": "https://arxiv.org/abs/2610.18566",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language model (LLM) routers reduce serving cost by choosing which model to call and how many output tokens to grant it for each"
@@ -647,7 +647,7 @@
     "url": "https://arxiv.org/abs/2610.17868",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Diffusion language models apply bidirectional attention over the whole context at every denoising step, so a longer context makes each step substantially more expensive."
@@ -670,7 +670,7 @@
     "url": "https://arxiv.org/abs/2610.17431",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language model (LLM) routers are increasingly deployed to optimize quality, latency, and cost through dynamic model selection and request rewriting. However, a compromised"
@@ -756,7 +756,7 @@
     "url": "https://arxiv.org/abs/2610.14710",
     "journal_ref": "",
     "comment": "19 pages",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large Language Models (LLMs) have shown strong potential for text-attributed graph learning by leveraging rich pre-trained knowledge and language understanding capabilities. Combining LLMs with"
@@ -799,7 +799,7 @@
     "url": "https://arxiv.org/abs/2610.13278",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Vision-language models (VLMs) exhibit complementary capabilities, yet selecting the most suitable expert for a given image-question query remains challenging due to heterogeneous multimodal inputs"
@@ -818,7 +818,7 @@
     "url": "https://arxiv.org/abs/2610.13276",
     "journal_ref": "",
     "comment": "41 pages, 6 figures, 20 tables, accepted for poster presentation at the NeurIPS 2026 Workshop on On-Device Intelligence: Foundation Models under Real-World Constraints (ODI 2026)",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Set-based language model routing aims to increase the coverage of the event where at least one model answers a query correctly while controlling the"
@@ -841,7 +841,7 @@
     "url": "https://arxiv.org/abs/2610.12242",
     "journal_ref": "",
     "comment": "Accepted by NeurIPS 2026",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language model (LLM) routing distributes inference work across different models, advancing the cost-quality Pareto frontier of LLM serving. While coarse-grained routing at the"
@@ -881,7 +881,7 @@
     "url": "https://arxiv.org/abs/2610.09981",
     "journal_ref": "",
     "comment": "20 pages, 5 figures, 9 tables",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "LLM routers pick a cheap or expensive model per request by its content, and many gateways and some cloud platforms can log that choice"
@@ -943,7 +943,7 @@
     "url": "https://arxiv.org/abs/2610.07354",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Deciding when to escalate a query from a small language model to a larger one requires a cheap signal that predicts, before the large"
@@ -1034,7 +1034,7 @@
     "url": "https://arxiv.org/abs/2610.06328",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language models (LLMs) often perform intermediate cognitive work while carrying out users' requests, yet it remains unclear which parts users intended to delegate"
@@ -1054,7 +1054,7 @@
     "url": "https://arxiv.org/abs/2610.06216",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Pre-generation success probes estimate response correctness from a language model's hidden activations before decoding, enabling cost-aware routing. While prior work has demonstrated their utility"
@@ -1079,7 +1079,7 @@
     "url": "https://arxiv.org/abs/2610.05982",
     "journal_ref": "",
     "comment": "12 pages, 8 figures",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "With the rapid development of artificial intelligence, the emergence of various Large Language Models (LLMs) has created a rich model ecosystem. However, this also"
@@ -1099,7 +1099,7 @@
     "url": "https://arxiv.org/abs/2610.04751",
     "journal_ref": "",
     "comment": "Work in progress",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Beyond scaling their parameters and data, large language models currently gain versatility on new problems along a single axis: the tokens they spend on"
@@ -1142,7 +1142,7 @@
     "url": "https://arxiv.org/abs/2610.03240",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language models (LLMs) are increasingly deployed in public health, finance, and governance, requiring both accuracy and societal value alignment. Despite recent advances, LLMs"
@@ -1159,7 +1159,7 @@
     "url": "https://arxiv.org/abs/2610.02972",
     "journal_ref": "",
     "comment": "11 pages, 5 figures, 7 tables (Excluding Appendix). CreateScore Planner App GitHub repo link: https://github.com/rupsa-arc1-2441139/createscore",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language models (LLMs) can support rubric-based screening of CVs, but applying a high-capability model to every candidate and criterion is costly. We present"
@@ -1181,7 +1181,7 @@
     "url": "https://arxiv.org/abs/2610.02762",
     "journal_ref": "",
     "comment": "8 pages, 15 figures, under review at NAACL",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Dynamic LLM routers promise to cut inference costs by sending each query to the cheapest model that can answer it correctly. We analyze six"
@@ -1203,7 +1203,7 @@
     "url": "https://arxiv.org/abs/2610.02516",
     "journal_ref": "",
     "comment": "13 pages, 2 figures, 1 table",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Zero-shot classifiers are useful for routing user requests to specialized LLM tasks, but scoring every request against a large candidate set is expensive: a"
@@ -1222,7 +1222,7 @@
     "url": "https://arxiv.org/abs/2610.00912",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language models can translate business descriptions into optimization models, but executable code may misrepresent constraints or objectives. A solver can then return an"
@@ -1270,7 +1270,7 @@
     "url": "https://arxiv.org/abs/2609.38585",
     "journal_ref": "",
     "comment": "21 pages, 4 figures, accepted at COLM 2026",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Existing Large Language Model (LLM) routing methods score LLMs independently to select top-$k$ models. However, this ignores model correlations and enforces a rigid computational"
@@ -1317,28 +1317,10 @@
     "url": "https://arxiv.org/abs/2609.37402",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language model (LLM) routing reduces serving cost by assigning each query to an appropriate model while preserving response quality. Learning such a router,"
-  },
-  {
-    "arxiv_id": "2609.37362",
-    "version": "v1",
-    "title": "Pretrain Once, Route Anywhere: Towards a Foundation Model for LLM Routing",
-    "authors": [
-      "Guannan Lai",
-      "Han-Jia Ye"
-    ],
-    "published": "2026-09-29T12:23:58Z",
-    "updated": "2026-09-29T12:23:58Z",
-    "url": "https://arxiv.org/abs/2609.37362",
-    "journal_ref": "",
-    "comment": "",
-    "group": "Model routing / cascading (adjacent)",
-    "status": "Pending reading; not a quality endorsement",
-    "first_seen": "2026-11-06",
-    "abstract_excerpt": "Large language model (LLM) routing aims to assign each query to the most suitable model from a heterogeneous candidate pool, improving the quality--efficiency trade-off"
   },
   {
     "arxiv_id": "2609.34942",
@@ -1359,7 +1341,7 @@
     "url": "https://arxiv.org/abs/2609.34942",
     "journal_ref": "",
     "comment": "21 pages including references and appendix",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "The inference efficiency of Multimodal Large Language Models (MLLMs) is severely constrained by massive visual token sequences induced by high-resolution inputs, with computational cost"
@@ -1378,7 +1360,7 @@
     "url": "https://arxiv.org/abs/2609.34736",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Large language model (LLM) routing aims to select the most suitable model for each incoming query. Most existing routers learn this decision directly from"
@@ -1489,7 +1471,7 @@
     "url": "https://arxiv.org/abs/2609.32821",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "Model merging efficiently combines specialized large language models (LLMs) without joint retraining, but can substantially alter expert routing in Mixture-of-Experts (MoE) models. Such \\emph{routing"
@@ -1509,7 +1491,7 @@
     "url": "https://arxiv.org/abs/2609.32344",
     "journal_ref": "",
     "comment": "",
-    "group": "Model routing / cascading (adjacent)",
+    "group": "Model / LLM routing and cascading",
     "status": "Pending reading; not a quality endorsement",
     "first_seen": "2026-11-06",
     "abstract_excerpt": "For large language models (LLMs), parametric adaptation is costly when retrieval already suffices. We introduce ALLOT, a hybrid-memory routing framework that separates learned write"

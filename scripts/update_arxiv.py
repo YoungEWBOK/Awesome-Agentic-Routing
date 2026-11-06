@@ -103,13 +103,13 @@ def search(client, query, config):
 def relevance(paper):
     title = paper["title"].lower()
     text = title + " " + paper["abstract"].lower()
-    routing = re.search(r"rout(?:e|er|ers|ing)|orchestrat|delegat|cascad", text)
+    routing = re.search(r"rout(?:e|er|ers|ing)|orchestrat|delegat|cascad|model selection|model recommendation", text)
     language = re.search(r"\bllms?\b|language models?", text)
     if not routing or not language:
         return None
     # Require selection among models/agents, rather than any use of routing in an LLM paper.
     selection = re.search(
-        r"\b(?:llms?|language models?|models?|agents?)[ -]+(?:routing|router|selection|cascad\w*)\b"
+        r"\b(?:llms?|language models?|models?|agents?)[ -]+(?:routing|router|selection|recommendation|cascad\w*)\b"
         r"|\b(?:routing|orchestration|orchestrator|delegation)\b.{0,65}\b(?:llms?|language models?|multi[- ]agent|agents)\b"
         r"|\b(?:multi[- ]model|multi[- ]llm|agentic|multi[- ]agent)[ -]+(?:routing|orchestrat\w*)\b",
         text)
@@ -121,7 +121,7 @@ def relevance(paper):
         return None
     if re.search(r"\bllm[- ]orchestrated\b", title) and not re.search(r"model selection|model routing|agent selection", paper["abstract"].lower()):
         return None
-    focused_title = re.search(r"llm.{0,20}rout|model.{0,12}rout|rout.{0,16}llm|rout.{0,16}language.model|agent.{0,16}rout|multi.agent.{0,20}orchestrat|agentic.orchestrat|model.orchestrat|sub.agent.delegat", title)
+    focused_title = re.search(r"llm.{0,20}rout|model.{0,12}rout|rout.{0,16}llm|rout.{0,16}language.model|agent.{0,16}rout|multi.agent.{0,20}orchestrat|agentic.orchestrat|model.orchestrat|sub.agent.delegat|model selection|model recommendation", title)
     pool_selection = re.search(r"(?:select|choos|switch|assign|allocat|delegat|rout)\w*.{0,55}(?:models|agents)|(?:model|llm|agent) pool|heterogeneous (?:models|llms|agents)|multi.model|multi.llm", text)
     if not focused_title and not pool_selection:
         return None
@@ -129,8 +129,8 @@ def relevance(paper):
     if re.search(r"agent|multi.turn|multi.step|long.horizon|workflow|tool.use|tool.call", text):
         return "Agentic routing / orchestration"
     if re.search(r"survey|benchmark", title):
-        return "Survey / evaluation (adjacent)"
-    return "Model routing / cascading (adjacent)"
+        return "Survey / evaluation"
+    return "Model / LLM routing and cascading"
 
 
 def due(now, state, interval):
@@ -174,7 +174,7 @@ def md(text):
 def render_recent(papers, state):
     lines = ["# Recent arXiv candidates / 最新待读论文", "",
              "[Back to curated list](README.md) · [Reading guide](READING_GUIDE.zh-CN.md)", "",
-             "Automatically retrieved and grouped by title/abstract keywords. Inclusion here is **not** a quality endorsement or evidence of peer review. Read the paper before promoting it to the curated list. Adjacent papers and false positives may appear; search is not exhaustive.", "",
+             "Automatically retrieved across model routing, LLM routing, and agent routing/orchestration, then grouped by title/abstract keywords. Inclusion here is **not** a quality endorsement or evidence of peer review. Read the paper before promoting it to the curated list. False positives may appear; search is not exhaustive.", "",
              "自动检索仅负责发现与去重；这里的论文尚待精读，不等同于精选推荐。正式发表状态请以出版页面为准。", "",
              "Last successful search (UTC): " + state["last_success"],
              "Search window (new submissions): " + state["window_start"] + " — " + state["window_end"],
@@ -182,7 +182,7 @@ def render_recent(papers, state):
              f"Tracking **{len(papers)}** candidates. Showing up to 30 most recently submitted papers per group; [all candidate metadata](data/candidates.json).", ""]
     if not papers:
         lines += ["No unreviewed candidates matched this search yet.", ""]
-    for group in ["Agentic routing / orchestration", "Survey / evaluation (adjacent)", "Model routing / cascading (adjacent)"]:
+    for group in ["Agentic routing / orchestration", "Survey / evaluation", "Model / LLM routing and cascading"]:
         subset = [p for p in papers if p["group"] == group]
         if not subset:
             continue

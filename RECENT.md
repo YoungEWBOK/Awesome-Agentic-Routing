@@ -2,16 +2,16 @@
 
 [Back to curated list](README.md) · [Reading guide](READING_GUIDE.zh-CN.md)
 
-Automatically retrieved and grouped by title/abstract keywords. Inclusion here is **not** a quality endorsement or evidence of peer review. Read the paper before promoting it to the curated list. Adjacent papers and false positives may appear; search is not exhaustive.
+Automatically retrieved across model routing, LLM routing, and agent routing/orchestration, then grouped by title/abstract keywords. Inclusion here is **not** a quality endorsement or evidence of peer review. Read the paper before promoting it to the curated list. False positives may appear; search is not exhaustive.
 
 自动检索仅负责发现与去重；这里的论文尚待精读，不等同于精选推荐。正式发表状态请以出版页面为准。
 
-Last successful search (UTC): 2026-11-06T09:01:25+00:00
+Last successful search (UTC): 2026-11-06T09:08:44+00:00
 Search window (new submissions): 2026-10-30 — 2026-11-06
 
 Already tracked candidates are also checked for revisions. Curated entries are maintained separately.
 
-Tracking **72** candidates. Showing up to 30 most recently submitted papers per group; [all candidate metadata](data/candidates.json).
+Tracking **71** candidates. Showing up to 30 most recently submitted papers per group; [all candidate metadata](data/candidates.json).
 
 ## Agentic routing / orchestration
 
@@ -135,7 +135,7 @@ Tracking **72** candidates. Showing up to 30 most recently submitted papers per 
   - Ziyan Wang, Shuqing Shi, James Oldfield et al. · Submitted 2026-10-05 · Updated 2026-10-05 · v1
   - Abstract excerpt (first 24 words): “In decentralized consumer-to-consumer (C2C) marketplaces, people list goods, negotiate with strangers, and rate one another, so trust rests on reputation. Large language model (LLM)…”
 
-## Model routing / cascading (adjacent)
+## Model / LLM routing and cascading
 
 - **[Route Before Response: Fail-Closed Routing for LLM-Enabled Customer-Service Software](https://arxiv.org/abs/2611.07534)**
   - Yuchen Cao, Zhenyu Mao, Jacky Wai Keung et al. · Submitted 2026-11-05 · Updated 2026-11-05 · v1
@@ -249,10 +249,10 @@ Tracking **72** candidates. Showing up to 30 most recently submitted papers per 
   - Guannan Lai, Gelin Bian, Hao-Xuan Ma et al. · Submitted 2026-09-29 · Updated 2026-09-29 · v1
   - Abstract excerpt (first 24 words): “Large language model (LLM) routing reduces serving cost by assigning each query to an appropriate model while preserving response quality. Learning such a router,…”
 
-- **[Pretrain Once, Route Anywhere: Towards a Foundation Model for LLM Routing](https://arxiv.org/abs/2609.37362)**
-  - Guannan Lai, Han-Jia Ye · Submitted 2026-09-29 · Updated 2026-09-29 · v1
-  - Abstract excerpt (first 24 words): “Large language model (LLM) routing aims to assign each query to the most suitable model from a heterogeneous candidate pool, improving the quality--efficiency trade-off…”
-
 - **[Resolution as a First-Class Decision: Task-Conditioned Routing for Efficient Multimodal Large Language Models](https://arxiv.org/abs/2609.34942)**
   - Zhiqiang Xia, Yang Li, Xinyuan Zhang et al. · Submitted 2026-09-28 · Updated 2026-09-28 · v1
   - Abstract excerpt (first 24 words): “The inference efficiency of Multimodal Large Language Models (MLLMs) is severely constrained by massive visual token sequences induced by high-resolution inputs, with computational cost…”
+
+- **[SeLMRoute: Probabilistic Semantic Evidence for Large Language Model Routing](https://arxiv.org/abs/2609.34736)**
+  - Vasilis Perifanis, Nikolaos Pavlidis, Symeon Symeonidis · Submitted 2026-09-28 · Updated 2026-09-28 · v1
+  - Abstract excerpt (first 24 words): “Large language model (LLM) routing aims to select the most suitable model for each incoming query. Most existing routers learn this decision directly from…”

@@ -48,6 +48,11 @@ class UpdateTests(unittest.TestCase):
         p.update(title="Visual Token Routing for LLM Agents", abstract="Token routing inside language models for agent tasks.")
         self.assertIsNone(u.relevance(p))
 
+    def test_model_selection_without_agent_is_in_scope(self):
+        p = paper()
+        p.update(title="Cost-aware Model Selection", abstract="Choose between large language models to balance cost and quality.")
+        self.assertEqual(u.relevance(p), "Model / LLM routing and cascading")
+
     def test_reclassified_candidate_removed(self):
         old, _, _ = u.merge_candidates([], [paper()], [], "2026-11-02")
         unrelated = paper(version="v2")

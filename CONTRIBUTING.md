@@ -4,7 +4,7 @@
 
 Prioritize a clear routing/orchestration research question, a useful conceptual contribution, and evidence that can be inspected in the paper. Favor papers with informative evaluations and available artifacts, but do not equate venue, popularity, or code availability with quality. Keep a manageable reading path.
 
-Include surveys and a limited set of model-routing/cascading foundations as explicitly adjacent work. Exclude unrelated network routing, model-internal MoE routing, generic agent applications, and papers whose only connection is the word “agent”.
+Model routing, LLM routing, and agent routing/orchestration are all first-class topics. Include query-level selection, cascading, quality/cost/latency optimization, cold-start models, transfer, surveys, and evaluation. Exclude unrelated network routing, model-internal MoE routing, generic agent applications, and papers whose only connection is the word “agent”.
 
 ## Add or revise a curated paper
 
@@ -20,7 +20,7 @@ The repository uses arXiv IDs and normalized titles for ordinary deduplication, 
 
 The workflow runs on the default branch. Its Friday trigger is **01:17 UTC / 09:17 Asia/Shanghai**. Scheduled searches are due after 14 local calendar days since the last successful search. With initialization on 2026-11-06, the next expected search is 2026-11-20. A manual run searches immediately and resets that successful-search date.
 
-The search covers new submissions since the previous successful run plus a seven-day overlap. On the initial run it covers 35 days plus the overlap. It retrieves all result pages within the configured limit, then filters title/abstract keywords into core and adjacent reading candidates. It also requests current metadata for all previously tracked candidates, catching revisions outside the new-submission window.
+The search covers new submissions since the previous successful run plus a seven-day overlap. On the initial run it covers 35 days plus the overlap. It retrieves all result pages within the configured limit, then filters title/abstract keywords into model/LLM routing, agentic routing, and survey/evaluation candidates. It also requests current metadata for all previously tracked candidates, catching revisions outside the new-submission window.
 
 Titles, authors, dates, links, and short abstract excerpts appear in `RECENT.md`. Candidates are **pending reading**, not selected recommendations. Full abstracts are used in memory for filtering and are not republished. Discovery cannot guarantee recall: terminology changes, indexing lag, and keyword false positives are possible. Older untracked revised papers and curated venue/title changes require editorial review.
 
