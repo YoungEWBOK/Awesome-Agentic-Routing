@@ -4,7 +4,7 @@
 
 New submissions retrieved from arXiv and grouped by title/abstract keywords. Entries await editorial review. Official code and publication venues are recorded in the main list after source verification.
 
-Last search (UTC): 2026-11-06T09:09:47+00:00.
+Last search (UTC): 2026-11-06T09:30:33+00:00.
 
 New-submission window: 2026-10-30 — 2026-11-06.
 
